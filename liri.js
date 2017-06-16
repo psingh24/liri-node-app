@@ -5,6 +5,7 @@ var Twit = require("twit");
 var config = require("./keys")
 var Spotify = require('node-spotify-api');
 var request = require("request")
+var fs = require("fs")
 
 var T = new Twit(config.twitterKeys);
 var S = new Spotify(config.spotifyKeys)
@@ -49,6 +50,15 @@ function getTwitterData(err, data, response) {
         console.log(tweets[i].user.name)
         console.log("=============================================================")
     }
+
+     var output = "\nTwitter Search: "+query+"\n======================" 
+
+    fs.appendFile("random.txt", output, function(error){
+
+	if(error) {
+		console.log(error)
+	}
+})
 }
 
 function getSpotifyData(err, data) {
@@ -66,6 +76,15 @@ console.log("Artist: "+artist)
 console.log("Album: "+album)
 console.log("Song Name: "+songName)
 console.log("Preview Url: "+preview)
+
+ var output = "\nSpotify Search: "+songName+", "+artist+"\n======================" 
+
+    fs.appendFile("random.txt", output, function(error){
+
+	if(error) {
+		console.log(error)
+	}
+})
 }
  
 function getMovieData(error, response, body) {
@@ -83,6 +102,26 @@ function getMovieData(error, response, body) {
     console.log("Actors: " + JSON.parse(body).Actors);
     console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
     
+    var output = "\nMovie Search: "+JSON.parse(body).Title+"\n======================" 
+
+    fs.appendFile("random.txt", output, function(error){
+
+	if(error) {
+		console.log(error)
+	}
+})
     
   }
 }
+
+// fs.writeFile("random.txt", total, function(error){
+
+// 	if(error) {
+// 		console.log(error)
+// 	}
+	
+	
+// })
+	
+
+	
