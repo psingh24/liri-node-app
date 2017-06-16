@@ -21,13 +21,22 @@ var spotifyParam = {
     type: 'track', 
     query: query
 }
+var movieParam = {
+    url: "http://www.omdbapi.com/?t=",
+    query: query,
+    plotAndApiKey: "&y=&plot=short&apikey=40e9cece"
+}
 
-if (searchTerm === "search-tweets") {
+if (searchTerm === "search-twitter") {
     T.get('search/tweets', tweetParam, getTwitterData)
 
-}else if (searchTerm === "spotify-this-song") {
+}
+else if (searchTerm === "spotify-this-song") {
     S.search(spotifyParam, getSpotifyData)
 
+}
+else if (searchTerm === "movie-this") {
+    request(movieParam.url+movieParam.query+movieParam.plotAndApiKey, getMovieData);
 }
 
 
@@ -35,6 +44,7 @@ function getTwitterData(err, data, response) {
     var tweets = data.statuses
     // console.log(tweets)
     for (var i=0; i < tweets.length; i++) {
+        console.log(tweets[i].created_at)
         console.log(tweets[i].text)
         console.log(tweets[i].user.name)
         console.log("=============================================================")
@@ -46,15 +56,33 @@ function getSpotifyData(err, data) {
     return console.log('Error occurred: ' + err);
   }
  
-console.log(data); 
+// console.log(data); 
+var artist = data.tracks.items[0].artists[0].name
+var songName = data.tracks.items[0].name
+var preview = data.tracks.items[0].preview_url
+var album = data.tracks.items[0].album.name
+
+console.log("Artist: "+artist)
+console.log("Album: "+album)
+console.log("Song Name: "+songName)
+console.log("Preview Url: "+preview)
 }
  
-// spotify.search(spotifyParam, getSpotifyData)
- 
-// S.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-//   if (err) {
-//     return console.log('Error occurred: ' + err);
-//   }
- 
-// console.log(data); 
-// });
+function getMovieData(error, response, body) {
+    // If the request is successful (i.e. if the response status code is 200)
+  if (!error && response.statusCode === 200) {
+
+    // Parse the body of the site and recover just the imdbRating
+    // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+    console.log("Title: " + JSON.parse(body).Title);
+    console.log("Year Released: " + JSON.parse(body).Year);
+    console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+    console.log("Produced In: " + JSON.parse(body).Country);
+    console.log("Lanuage(s): " + JSON.parse(body).Language);
+    console.log("Plot: " + JSON.parse(body).Plot);
+    console.log("Actors: " + JSON.parse(body).Actors);
+    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+    
+    
+  }
+}
