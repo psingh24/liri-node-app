@@ -18,7 +18,7 @@ var query = process.argv[3]
 var params = {
     twitParam: {
         q: query,
-        count: 10
+        count: 5
     },
     twitterParam: {
         screen_name: 'pstesttwit'
@@ -39,7 +39,6 @@ if (searchTerm === "search-twitter") {
 
 }
 else if(searchTerm === "my-tweets") {
-    console.log("hello")
     TT.get('statuses/user_timeline', params.twitterParam, getYourTwitter) 
   
 }
@@ -69,13 +68,7 @@ function getTwitterData(err, data, response) {
     }
 
         var output = "\nTwitter Search: "+query+"\n======================" 
-
-        fs.appendFile("log.txt", output, function(error){
-
-	        if(error) {
-		        console.log(error)
-	        }
-        })
+        writeToLogTxt(output)
 }
 
 function getYourTwitter(error, tweets, response) {
@@ -91,6 +84,8 @@ function getYourTwitter(error, tweets, response) {
             console.log("- "+personWhoTweeted)
             console.log("=============================================================")
         }
+        var output = "\nTwitter Search: "+personWhoTweeted+" Tweets"+"\n======================" 
+        writeToLogTxt(output)
     }
 }
 function getSpotifyData(err, data) {
@@ -111,12 +106,7 @@ function getSpotifyData(err, data) {
 
     var output = "\nSpotify Search: "+songName+", "+artist+"\n======================" 
 
-    fs.appendFile("log.txt", output, function(error){
-
-	    if(error) {
-		    console.log(error)
-	    }
-    })
+    writeToLogTxt(output)
 }
  
 function getMovieData(error, response, body) {
@@ -144,12 +134,7 @@ function getMovieData(error, response, body) {
         
         var output = "\nMovie Search: "+title+"\n======================" 
 
-        fs.appendFile("log.txt", output, function(error){
-
-	        if(error) {
-		        console.log(error)
-	        }
-        })
+        writeToLogTxt(output)
     }
 }
 function doWhatItSays() {
@@ -188,5 +173,14 @@ function doWhatItSays() {
         })
         
 })
+}
+
+function writeToLogTxt(output) {
+    fs.appendFile("log.txt", output, function(error){
+
+	        if(error) {
+		        console.log(error)
+	        }
+        })
 }
 

@@ -1,22 +1,11 @@
 
-
-Movie Search: Frozen
+Twitter Search: celtics
 ======================
-Movie Search: Air Bud
-======================
-Movie Search: Frozen
+Twitter Search: pstest Tweets
 ======================
 Movie Search: The Matrix
 ======================
-Movie Search: The Matrix
+Spotify Search: I Believe I Can Fly, R. Kelly
 ======================
-Movie Search: Space Jam
-======================
-Movie Search: Space Jam
-======================
-Spotify Search: I Want It That Way, Backstreet Boys
-======================
-Spotify Search: I Want It That Way, Backstreet Boys
-======================
-Spotify Search: I Want It That Way, Backstreet Boys
+Twitter Search: pstest Tweets
 ======================
