@@ -1,19 +1,27 @@
 var Twit = require("twit");
+var Twitter = require('twitter');
 var config = require("./keys")
 var Spotify = require('node-spotify-api');
 var request = require("request")
 var fs = require("fs")
 
-var T = new Twit(config.twitterKeys);
+//Twit for general search
+var T = new Twit(config.twitKeys);
+//search your tweets
+var TT = new Twitter(config.twitKeys)
+//Spotify
 var S = new Spotify(config.spotifyKeys)
 
 var searchTerm = process.argv[2]
 var query = process.argv[3]
 
 var params = {
-    tweetParam: {
+    twitParam: {
         q: query,
         count: 10
+    },
+    twitterParam: {
+        screen_name: 'pstesttwit'
     },
     spotifyParam: {
         type: 'track', 
@@ -27,8 +35,13 @@ var params = {
 }
 
 if (searchTerm === "search-twitter") {
-    T.get('search/tweets', params.tweetParam, getTwitterData)
+    T.get('search/tweets', params.twitParam, getTwitterData)
 
+}
+else if(searchTerm === "my-tweets") {
+    console.log("hello")
+    TT.get('statuses/user_timeline', params.twitterParam, getYourTwitter) 
+  
 }
 else if (searchTerm === "spotify-this-song") {
     S.search(params.spotifyParam, getSpotifyData)
@@ -65,6 +78,21 @@ function getTwitterData(err, data, response) {
         })
 }
 
+function getYourTwitter(error, tweets, response) {
+    if (!error) {
+        var dataArray = tweets
+        for (var i=0; i < dataArray.length; i++) {
+            var dateTweeted = tweets[i].created_at;
+            var tweet = tweets[i].text;
+            var personWhoTweeted = tweets[i].user.name;
+            console.log(dateTweeted)
+            console.log("")
+            console.log(tweet)
+            console.log("- "+personWhoTweeted)
+            console.log("=============================================================")
+        }
+    }
+}
 function getSpotifyData(err, data) {
     if (err) {
         return console.log('Error occurred: ' + err);
