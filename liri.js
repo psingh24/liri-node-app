@@ -36,6 +36,8 @@ else if (searchTerm === "spotify-this-song") {
 }
 else if (searchTerm === "movie-this") {
     request(params.movieParam.url+params.movieParam.query+params.movieParam.plotAndApiKey, getMovieData);
+} else if (searchTerm === "do-what-it-says") {
+    doWhatItSays()
 }
 
 
@@ -55,7 +57,7 @@ function getTwitterData(err, data, response) {
 
         var output = "\nTwitter Search: "+query+"\n======================" 
 
-        fs.appendFile("random.txt", output, function(error){
+        fs.appendFile("log.txt", output, function(error){
 
 	        if(error) {
 		        console.log(error)
@@ -81,7 +83,7 @@ function getSpotifyData(err, data) {
 
     var output = "\nSpotify Search: "+songName+", "+artist+"\n======================" 
 
-    fs.appendFile("random.txt", output, function(error){
+    fs.appendFile("log.txt", output, function(error){
 
 	    if(error) {
 		    console.log(error)
@@ -114,12 +116,39 @@ function getMovieData(error, response, body) {
         
         var output = "\nMovie Search: "+title+"\n======================" 
 
-        fs.appendFile("random.txt", output, function(error){
+        fs.appendFile("log.txt", output, function(error){
 
 	        if(error) {
 		        console.log(error)
 	        }
         })
     }
+}
+function doWhatItSays() {
+    fs.readFile("random.txt", "utf8", function(error, data){
+
+	        if(error) {
+		        console.log(error)
+	        }
+
+            var results = data.slice(18)
+            console.log(results)
+          
+            S.search({ type: 'track', query: results}, function(err, data) {
+            if (err) {
+            return console.log('Error occurred: ' + err);
+            }
+            var artist = data.tracks.items[0].artists[0].name
+            var songName = data.tracks.items[0].name
+            var preview = data.tracks.items[0].preview_url
+            var album = data.tracks.items[0].album.name
+
+            console.log("")
+            console.log("Artist: "+artist)
+            console.log("Album: "+album)
+            console.log("Song Name: "+songName)
+            console.log("Preview Url: "+preview)
+        })
+})
 }
 
