@@ -135,8 +135,8 @@ function doWhatItSays() {
             console.log(results)
           
             S.search({ type: 'track', query: results}, function(err, data) {
-            if (err) {
-            return console.log('Error occurred: ' + err);
+                if (err) {
+                    return console.log('Error occurred: ' + err);
             }
             var artist = data.tracks.items[0].artists[0].name
             var songName = data.tracks.items[0].name
@@ -148,7 +148,17 @@ function doWhatItSays() {
             console.log("Album: "+album)
             console.log("Song Name: "+songName)
             console.log("Preview Url: "+preview)
+
+            var output = "\nSpotify Search: "+songName+", "+artist+"\n======================"
+
+            fs.appendFile("log.txt", output, function(error){
+
+	            if(error) {
+		            console.log(error)
+	            }
+            })
         })
+        
 })
 }
 
