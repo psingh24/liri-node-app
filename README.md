@@ -7,16 +7,53 @@ Categories users can search from:
 
 Twitter
 -------
-...This allows the user to access the latest 20 tweets from my Twitter
+This allows the user to access the latest 20 tweets from my Twitter
 
 Command:
 ```
 node liri.js my-tweets
 ```
+Results:
+```
+//Your last 5 tweets
+Sun Jun 18 03:04:51 +0000 2017
+
+Boston will regret trading fultz
+- pstest
+=============================================================
+
+Also you can search twitter using and keyword(s)
+Command:
+```
+node liri.js search-twitter "Global Warming"
+```
+Results(displays 5 latest tweets. Only display one for example)
+```
+Mon Jun 19 23:02:38 +0000 2017
+
+Connelly: Perry says carbon is not 'primary contributor' to global warming https://t.co/PoV3Wc1VS8
+- mark
+=============================================================
+```
 
 Spotify
 -------
 This allows the user to search for a song and access information about that song from Spotify
+
+Command:
+```
+node liri.js spotify-this-song "I believe I can fly"
+```
+Results:
+```
+//Displays the Artist, Album, Song Name and preview url
+Artist: R. Kelly
+Album: R.
+Song Name: I Believe I Can Fly
+Preview Url: https://p.scdn.co/mp3-preview/a2ba83e13c343e380e5872e5c60d2ca3c6880738?cid=83181921eed2490091eaa49fd8785f48
+
+```
+
 
 OMDB
 ----
