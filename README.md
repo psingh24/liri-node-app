@@ -7,7 +7,12 @@ Categories users can search from:
 
 Twitter
 -------
-This allows the user to access the latest 20 tweets from my Twitter
+...This allows the user to access the latest 20 tweets from my Twitter
+
+Command:
+```
+node liri.js my-tweets
+```
 
 Spotify
 -------
