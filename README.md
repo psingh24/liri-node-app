@@ -59,3 +59,22 @@ Preview Url: https://p.scdn.co/mp3-preview/a2ba83e13c343e380e5872e5c60d2ca3c6880
 OMDB
 ----
 This allows the user to search for a movie title and return specific IMDB information about that movie
+
+
+Command:
+```
+node liri.js movie-this "Space Jam"
+```
+Results:
+```
+//Displays the some relevant movie info
+Title: Space Jam
+Year Released: 1996
+IMDB Rating: 6.3
+Produced In: USA
+Lanuage(s): English
+Plot: In a desperate attempt to win a basketball match and earn their freedom, the Looney Tunes seek the aid of retired basketball champion, Michael Jordan.
+Actors: Michael Jordan, Wayne Knight, Theresa Randle, Manner Washington
+Rotten Tomatoes Rating: 37%
+
+```
