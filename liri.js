@@ -43,14 +43,44 @@ else if(searchTerm === "my-tweets") {
   
 }
 else if (searchTerm === "spotify-this-song") {
-    S.search(params.spotifyParam, getSpotifyData)
+    if(query) {
+        S.search(params.spotifyParam, getSpotifyData)
+    }else {
+        S.search({type: 'track', query: "The Sign"}, function(err, data) {
+            if (err) {
+                return console.log('Error occurred: ' + err);
+            }
+                var artist = data.tracks.items[4].artists[0].name;
+                var songName = data.tracks.items[4].name;
+                var preview = data.tracks.items[4].preview_url;
+                var album = data.tracks.items[4].album.name;
+
+                console.log("")
+                console.log("Artist: "+artist)
+                console.log("Album: "+album)
+                console.log("Song Name: "+songName)
+                console.log("Preview Url: "+preview)
+
+                var output = "\nSpotify Search: "+songName+", "+artist+"\n======================" 
+
+                writeToLogTxt(output)
+                
+        })
+    }
+
 
 }
 else if (searchTerm === "movie-this") {
-    request(params.movieParam.url+params.movieParam.query+params.movieParam.plotAndApiKey, getMovieData);
+    if(query) {
+        request(params.movieParam.url+params.movieParam.query+params.movieParam.plotAndApiKey, getMovieData);
+    } else {
+        request(params.movieParam.url+"Mr. Nobody"+params.movieParam.plotAndApiKey, getMovieData);
+    }
+    
 } else if (searchTerm === "do-what-it-says") {
     doWhatItSays()
 }
+
 
 
 function getTwitterData(err, data, response) {
