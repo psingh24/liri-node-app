@@ -12,7 +12,6 @@ LIRI NODE.JS APP
 * OMDB API
 
 
-Categories users can search from:
 
 Twitter
 -------
