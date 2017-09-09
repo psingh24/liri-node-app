@@ -3,6 +3,15 @@ LIRI NODE.JS APP
 
 ##LIRI is a command line node app that allows users to choose what type of data they wish to search for and what to information to search under each category. It returns the information to the console and also stores the data in the log.txt file
 
+### Technologies used:
+
+* Javascript
+* Node.js
+* Twitter API
+* Spotify API
+* OMDB API
+
+
 Categories users can search from:
 
 Twitter

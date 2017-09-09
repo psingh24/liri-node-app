@@ -23,3 +23,5 @@ Spotify Search: The Sign, Ace of Base
 ======================
 Movie Search: Mr. Nobody
 ======================
+Spotify Search: Hello, Adele
+======================
